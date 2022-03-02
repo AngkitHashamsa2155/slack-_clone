@@ -64,7 +64,7 @@ const Header = () => {
 
   const logOut = () => {
     signOut(auth)
-      .then((data) => {
+      .then(() => {
         // Sign-out successful.
         navigate("/login");
         localStorage.clear();
@@ -101,12 +101,14 @@ const Header = () => {
             }}
             variant="dot"
           >
-            <Avatar
-              alt="Remy Sharp"
-              src={user?.photoURL || penguine}
-              variant="square"
-              className={classes.square}
-            />
+            {user?.photoURL && (
+              <Avatar
+                alt="Remy Sharp"
+                src={user?.photoURL || penguine}
+                variant="square"
+                className={classes.square}
+              />
+            )}
           </StyledBadge>
         </div>
 

@@ -7,7 +7,7 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import * as actions from "../../Redux/actions";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const onSubmit = () => {
     signInWithPopup(firebase.auth, firebase.provider)

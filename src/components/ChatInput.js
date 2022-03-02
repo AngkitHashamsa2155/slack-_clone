@@ -15,33 +15,36 @@ const ChatInput = ({ id, roomName }) => {
     // if (!id) {
     //   return false;
     // }
-
-    try {
-      const docRef = await addDoc(
-        collection(firebase.db, "rooms", id, "message"),
-        {
-          message: inputField.current.value,
-          timestamp: serverTimestamp(),
-          user: user?.displayName,
-          userImage: user?.photoURL,
-        }
-      );
-      inputField.current.value = "";
-      // console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
+    if (inputField.current.value) {
+      try {
+        const docRef = await addDoc(
+          collection(firebase.db, "rooms", id, "message"),
+          {
+            message: inputField.current.value,
+            timestamp: serverTimestamp(),
+            user: user?.displayName,
+            userImage: user?.photoURL,
+          }
+        );
+        inputField.current.value = "";
+        // console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
+    } else {
+      alert("please enter value");
     }
   };
   return (
     <InputContainer>
-      <form>
+      <form onSubmit={sendMessage}>
         <input
           type="text"
           placeholder={`Message #${roomName}`}
           ref={inputField}
           required
         />
-        <Button hidden type="submit" onClick={sendMessage}>
+        <Button hidden type="submit">
           Send
         </Button>
       </form>
